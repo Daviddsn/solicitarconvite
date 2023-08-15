@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const header = `Solicitação de Convite - ${formattedDate}`;
         
         const messages = entries.map(function (entry) {
-            return `${header}%0A%0A<strong>Nome:</strong> ${entry.name}%0A<strong>Evento:</strong> ${entry.event}%0A<strong>Data:</strong> ${entry.date}%0A<strong>Horário:</strong> ${entry.time}%0A<strong>Pastor para Contato:</strong> ${entry.pastor}%0A<strong>Número para Contato:</strong> ${entry.number}%0A<strong>Congregação do Convidado:</strong> ${entry.congregation}%0A<strong>Propósito:</strong> ${entry.purpose}`;
-        });
+            return `${header}%0A%0A*Nome:* ${entry.name}%0A*Evento:* ${entry.event}%0A*Data:* ${entry.date}%0A*Horário:* ${entry.time}%0A*Pastor para Contato:* ${entry.pastor}%0A*Número para Contato:* ${entry.number}%0A*Congregação do Convidado:* ${entry.congregation}%0A*Propósito:* ${entry.purpose}`;
+        }); 
 
         const fullMessage = messages.join("%0A%0A");
         const whatsappURL = `https://wa.me/?text=${fullMessage}`;
