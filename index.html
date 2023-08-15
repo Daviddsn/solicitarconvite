@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Formulário</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Contato</h1>
+        <form id="contact-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="event">Evento:</label>
+            <input type="text" id="event" name="event" required>
+            
+            <div class="date-time-container">
+                <div>
+                    <label for="date">Data:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="time">Horário:</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+            </div>
+            
+            <label for="pastor">Pastor Para Contato:</label>
+            <input type="text" id="pastor" name="pastor" required>
+            
+            <label for="number">Número Para Contato:</label>
+            <input type="tel" id="number" name="number" required>
+            
+            <label for="congregation">Congregação do Convidado:</label>
+            <input type="text" id="congregation" name="congregation" required>
+            
+            <label for="purpose">Selecione o Propósito:</label>
+            <select id="purpose" name="purpose">
+                <option value="ministrar">Ministrar</option>
+                <option value="louvar">Louvar</option>
+                <option value="palestrar">Palestrar</option>
+            </select>
+            
+            <button type="button" id="add-button">Adicionar Informações</button>
+            <button type="submit" id="share-button">Compartilhar Informações</button>
+        </form>
+        <div id="entries-list"></div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>
