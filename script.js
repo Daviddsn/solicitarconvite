@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addButton.addEventListener("click", function () {
         const entry = {
+            requester: document.getElementById("requester").value,
             name: document.getElementById("name").value,
             event: document.getElementById("event").value,
             date: document.getElementById("date").value,
@@ -33,23 +34,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
+        const formattedDate = formatDate(currentDate);
         
         const header = `Solicitação de Convite - ${formattedDate}`;
         
         const messages = entries.map(function (entry) {
-            return `${header}%0A%0A*Nome:* ${entry.name}%0A*Evento:* ${entry.event}%0A*Data:* ${entry.date}%0A*Horário:* ${entry.time}%0A*Pastor para Contato:* ${entry.pastor}%0A*Número para Contato:* ${entry.number}%0A*Congregação do Convidado:* ${entry.congregation}%0A*Propósito:* ${entry.purpose}`;
-        }); 
+            return `${header}%0A%0A*Solicitante:* ${entry.requester}%0A*Nome/Conjunto Solicitado:* ${entry.name}%0A*Evento:* ${entry.event}%0A*Data:* ${formatDate(entry.date)}%0A*Horário:* ${entry.time}%0A*Pastor para Contato:* ${entry.pastor}%0A*Número para Contato:* ${entry.number}%0A*Congregação - Setor/Campo do Convidado:* ${entry.congregation}%0A*Propósito:* ${entry.purpose}`;
+        });
 
         const fullMessage = messages.join("%0A%0A");
         const whatsappURL = `https://wa.me/?text=${fullMessage}`;
         window.open(whatsappURL, "_blank");
 
+        entries.length = 0;
         resetForm();
         updateEntriesList();
     });
 
-    
+    const numberInput = document.getElementById("number");
+    const numberMask = new IMask(numberInput, {
+        mask: '(00) 00000-0000'
+    });
+
     function resetForm() {
         form.reset();
     }
@@ -101,3 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+}

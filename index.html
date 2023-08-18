@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Formulário</title>
 </head>
 <body>
     <div class="container">
-        <h1>Formulário de Solicitação De Convite</h1>
+        <h1>Formulário de Solicitação de Convite</h1>
         <form id="contact-form">
-            <label for="name">Nome/Conjunto:</label>
+            <label for="requester">Solicitante:</label>
+            <input type="text" id="requester" name="requester">
+            
+            <label for="name">Nome/Conjunto Solicitado:</label>
             <input type="text" id="name" name="name">
             
             <label for="event">Evento:</label>
@@ -34,7 +38,7 @@
             <input type="tel" id="number" name="number">
             
             <label for="congregation">Congregação - Setor/Campo do Convidado:</label>
-            <input type="text" id="congregation" name="congregation">
+            <input type="text" id="congregation" name="congregation" placeholder="Lamarão 3 - Setor 05">
             
             <label for="purpose">Selecione o Propósito:</label>
             <select id="purpose" name="purpose">
@@ -44,10 +48,11 @@
             </select>
             
             <button type="button" id="add-button">Adicionar Informações</button>
-            <button type="submit" id="share-button">Compartilhar Informações</button>
+            <button type="submit" id="share-button"><i class="fab fa-whatsapp"></i> Compartilhar Informações</button>
         </form>
         <div id="entries-list"></div>
     </div>
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/7.0.2/imask.min.js"></script> 
 </body>
 </html>
