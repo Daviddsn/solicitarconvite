@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const entries = [];
 
+    // const numberInput = document.getElementById("number");
+    // const numberMask = new IMask(numberInput, {
+    //     mask: '(00) 00000-0000'
+    // });
+
     addButton.addEventListener("click", function () {
         const entry = {
             requester: document.getElementById("requester").value,
@@ -34,28 +39,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const currentDate = new Date();
-        const formattedDate = formatDate(currentDate);
+        const formattedDate = currentDate.toLocaleDateString();
         
         const header = `Solicitação de Convite - ${formattedDate}`;
         
         const messages = entries.map(function (entry) {
-            return `${header}%0A%0A*Solicitante:* ${entry.requester}%0A*Nome/Conjunto Solicitado:* ${entry.name}%0A*Evento:* ${entry.event}%0A*Data:* ${formatDate(entry.date)}%0A*Horário:* ${entry.time}%0A*Pastor para Contato:* ${entry.pastor}%0A*Número para Contato:* ${entry.number}%0A*Congregação - Setor/Campo do Convidado:* ${entry.congregation}%0A*Propósito:* ${entry.purpose}`;
-        });
+            return `${header}%0A%0A*Solicitante:* ${entry.requester}%0A%0A*Nome:* ${entry.name}%0A*Evento:* ${entry.event}%0A*Data:* ${entry.date}%0A*Horário:* ${entry.time}%0A*Pastor para Contato:* ${entry.pastor}%0A*Número para Contato:* ${entry.number}%0A*Congregação do Convidado:* ${entry.congregation}%0A*Propósito:* ${entry.purpose}`;
+        }); 
 
         const fullMessage = messages.join("%0A%0A");
         const whatsappURL = `https://wa.me/?text=${fullMessage}`;
         window.open(whatsappURL, "_blank");
 
-        entries.length = 0;
         resetForm();
         updateEntriesList();
     });
 
-    const numberInput = document.getElementById("number");
-    const numberMask = new IMask(numberInput, {
-        mask: '(00) 00000-0000'
-    });
-
+    
     function resetForm() {
         form.reset();
     }
@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
             entryElement.className = "entry";
             entryElement.innerHTML = `
                 <h3>Informação ${index + 1}</h3>
+                <p><strong>Solicitante:</strong> ${entry.requester}</p>
                 <p><strong>Nome:</strong> ${entry.name}</p>
                 <p><strong>Evento:</strong> ${entry.event}</p>
                 <p><strong>Data:</strong> ${entry.date}</p>
@@ -94,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function editEntry(index) {
         const entry = entries[index];
         if (entry) {
+            document.getElementById("requester").value = entry.requester;
             document.getElementById("name").value = entry.name;
             document.getElementById("event").value = entry.event;
             document.getElementById("date").value = entry.date;
@@ -107,11 +109,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-
-
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-}
